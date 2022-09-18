@@ -23,3 +23,31 @@ def sieve(n): # : int) -> list[int]:
     return primes
 
 print(sieve(15))
+
+# faster version, where elements are added to list (faster) instead of
+# being removed from the middle of a list (slower).
+
+def sieve2(n):
+    candidates = list(range(2,n+1))
+    primes = []
+    while candidates:
+        p, remaining_candidates = candidates[0], []
+        primes.append(p)
+        for cand in candidates:
+            if cand % p != 0:
+                remaining_candidates.append(cand)
+        candidates = remaining_candidates
+    return primes
+
+print(sieve2(15))
+
+# faster version where list comprehension is used.
+def sieve3(n):
+    candidates = list(range(2,n+1))
+    primes = []
+    while candidates:
+        primes.append(candidates[0])
+        candidates = [candidate for candidate in candidates if candidate % primes[-1] != 0] 
+    return primes
+
+print(sieve3(15))
