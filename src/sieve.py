@@ -15,16 +15,11 @@ def sieve(n): # : int) -> list[int]:
     candidates = list(range(2, n + 1))
     primes = [] 
     while candidates:
-        i=1
-        length = len(candidates)
-        while i < length:
-            if candidates[i] % candidates[0] == 0:
-                    candidates.remove(candidates[i])
-                    length -= 1
-            else: 
-                i += 1 
-        primes.append(candidates[0])
-        del candidates[0]
+        p=candidates[0]
+        for candidate in candidates:
+            if candidate%p == 0:
+                candidates.remove(candidate)
+        primes.append(p)
     return primes
 
 print(sieve(15))
