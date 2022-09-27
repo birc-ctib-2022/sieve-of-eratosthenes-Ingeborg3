@@ -51,3 +51,29 @@ def sieve3(n):
     return primes
 
 print(sieve3(15))
+
+# Even faster version.
+
+def sieve4(n):
+    candidates = [False]*2 + [True]*(n-1)
+    i = 2
+    while i*i < n:
+        if not candidates[i]: # If candidate[0] is False, not candidate[0] is 
+            # True and the if-body is executed. 
+            break # break while-loop.
+        for j in range(i**2, n+1, i): # nb i**2 must be used, not i^2.
+            candidates[j] = False
+        i += 1
+    
+    return [i for i, b in enumerate(candidates) if b]
+
+    # The list returned can be made as below instead of list 
+    # comprehension:
+candidates = [False]*2 + [True]*14
+lst = []
+for i, b in enumerate(candidates):
+    if b:
+        lst.append(i)
+print(lst) # non-primes still in list. 
+
+print(sieve4(15))
